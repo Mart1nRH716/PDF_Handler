@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="card-header text-center">
+        <h3 class="fw-bold">¿Que desea realizar?</h3>
+    </div>
+    
+    <a href="{% url 'extract-pdf' %}">Extraer pdfs</a>
+    <br>
+    <a href="{% url 'combine-pdf' %}">Combinar pdfs</a>
+    
+{% endblock %}

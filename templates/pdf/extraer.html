@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header text-center">
+        <h3 class="fw-bold">Procesar PDF</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" class="row g-3 justify-content-center">
+            {% csrf_token %}
+            
+            <!-- Renderiza el campo para subir archivos manualmente -->
+            <div class="mb-3">
+                <label for="pdf_files" class="form-label">Seleccionar PDF</label>
+                {{ form.file }}
+            </div>
+            
+            <!-- Renderiza el campo de páginas a extraer -->
+            <div class="mb-3">
+                {{ form.pages_to_extract.label_tag }}
+                {{ form.pages_to_extract }}
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-primary btn-lg">Procesar PDF</button>
+            </div>
+        </form>
+    </div>
+
+    {% if object and object.combined_pdf %}
+    <div class="card-footer text-center">
+        <p>Archivo procesado:</p>
+        <a href="{{ object.combined_pdf.url }}" class="btn btn-success btn-lg px-5" download>Descargar</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

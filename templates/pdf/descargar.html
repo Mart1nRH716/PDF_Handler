@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Tus archivos están listos para descargar</h1>
+    <p>Puedes descargar el archivo comprimido a continuación:</p>
+    <a href="{% url 'descargar_archivos' filename %}">Descargar archivo</a>
+{% endblock %}

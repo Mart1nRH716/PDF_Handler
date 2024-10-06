@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header text-center">
+        <h3 class="fw-bold">Combinar PDFs</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" class="row g-3 justify-content-center">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="pdf_file" class="form-label">Seleccionar PDF</label>
+                {{ form.pdf_file }}  <!-- Permite la selección de un archivo -->
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-primary btn-lg">Subir PDF</button>
+            </div>
+        </form>
+
+        <!-- Mostrar archivos subidos -->
+        {% if uploaded_files %}
+            <h4>Archivos subidos:</h4>
+            <ul>
+                {% for file in uploaded_files %}
+                    <li>{{ file }}</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Botón para combinar los PDFs -->
+            <form method="post" action="{% url 'combine-pdf' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Combinar PDFs</button>
+            </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
